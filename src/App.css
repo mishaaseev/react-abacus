@@ -1,9 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .abacus{
   max-width: 500px;
   margin: 0 auto;
 }
 
 .player{
+  margin-bottom: 2em;
+}
+
+.player-actions{
+  position: relative;
+  display: flex;
+  gap: 1em;
+}
+
+.rows{
+  flex-grow: 1;
+}
+
+
+.action-button{
+  position: absolute;
+  padding-bottom: 3em;
+  width: 50%;
+  opacity: 1%;
+}
+
+.action-button__right{
+  right: 0;
+}
+
+.action-button__left{
+  left: 0;
+}
+
+.actions{
+  padding: 2em 0em;
+}
+
+.score{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mb1{
+  margin-bottom: 1em;
+}
+
+.mb2{
   margin-bottom: 2em;
 }
 
@@ -39,4 +86,9 @@
   position: relative;
   display: flex;
   justify-content: flex-start;
+}
+
+.disabled{
+  opacity: 0.5;
+  pointer-events: none;
 }
