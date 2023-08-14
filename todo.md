@@ -7,10 +7,11 @@
 + Limit max score
 + Fancy Player name change
 + Animte player win
++ Set max score
 - Fancy increase/decrease buttons
 - Animate score increase/decrease
-- Set max score
+- Apply nice css styles
 
 + Style add player button
 + Style players (card, remove icon-button, player name and score)
-- Add settings icon-button to the top bar
++ Add settings icon-button to the top bar
