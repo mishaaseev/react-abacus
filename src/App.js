@@ -58,11 +58,13 @@ function App() {
 
   function saveSettings(e) {
     e.preventDefault();
+
     setOpenSettings(false);
   }
 
   function handleChange(e) {
     setSettings({...settings, [e.target.name]: e.target.value});
+    console.log("App", e.target.name, e.target.value);
     // e.target.name == "maxScore" ? setMaxScore([e.target.value]) : setType(e.target.value);
   }
 
@@ -101,7 +103,7 @@ function App() {
   }, [score])
 
   return (
-    <div className="abacus">
+    <div className="abacus select-none">
       <Modal
         isOpen={Boolean(playerWins)}
         style={customStyles}
@@ -118,36 +120,39 @@ function App() {
         contentLabel="Example Modal"
       >
         <form onSubmit={saveSettings}>
+
+        <div className="flex justify-end">
+          <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700" type="submit" onClick={() => {
+            setOpenSettings(false)
+          }
+          }>X</button>
+        </div>
         <div className="fields mb-4">
           <label>
             <span className="block">Max score</span>
-            <input onChange={handleChange} name='maxScore' value={settings.maxScore} type="number" />
+            <input onChange={handleChange} name='maxScore' value={settings.maxScore} type="number" className='mb-2 block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'/>
           </label>
           <label>
             <span className="block">Type</span>
-            <select name="type" value={settings.type} onChange={handleChange}>
+
+            <select name="displayType" value={settings.displayType} onChange={handleChange} className = "block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="abacus">Abacus</option>
               <option value="number">Number</option>
             </select>
+            
+
           </label>
         </div>
 
-
-        <div className="">
-          <button type="submit" onClick={() => {
-            setOpenSettings(false)
-          }
-          }>Save</button>
-        </div>
         </form>
       </Modal>
-      <div className={"actions " + (playerWins ? "disabled" : "")} >
+      <div className={"flex gap-2 actions " + (playerWins ? "disabled" : "")} >
         <button onClick={() => setOpenSettings(true)} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Settings</button>
         <button onClick={addPlayer} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Add player</button>
       </div>
       {
         score.map((player, i) =>
-          <Player key={i} name={player.name} score={player.score} disabled={playerWins} onRemovePlayer={() => removePlayer(i)} onIncrease={() => increaseScore(i)} onDecrease={() => decresaseScore(i)} onChangeName={(newName) => changeName(i, newName)}></Player>)
+          <Player key={i} type = {settings.displayType} name={player.name} score={player.score} disabled={playerWins} onRemovePlayer={() => removePlayer(i)} onIncrease={() => increaseScore(i)} onDecrease={() => decresaseScore(i)} onChangeName={(newName) => changeName(i, newName)}></Player>)
       }
 
     </div>
